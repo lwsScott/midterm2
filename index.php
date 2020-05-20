@@ -24,6 +24,54 @@ $f3->route('GET /', function () {
 
 });
 
+
+// Define the survey route
+$f3->route('GET|POST /survey', function($f3) {
+
+    // now get the interests
+    $questions = getSurveyQuestions();
+    $f3->set('questions', $questions);
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        // validate the data
+
+        // validate name
+        if (!validName($_POST['name'])) {
+            //var_dump($_POST);
+            $valid = false;
+            $f3->set('errors["name"]', "Please provide your name");
+            //echo "Here";
+        } else {
+            $f3->set('selectedName', $_POST['name']);
+            //echo $f3->get('selectedName');
+        }
+
+        // validate the question/answers
+        if (!isset($_POST['questions']))
+        {
+            $valid = false;
+            $f3->set('errors["questions"]', "Please select at least one");
+            //echo "Here";
+        }
+        elseif (!validAnswers($_POST['questions'])) {
+            $valid = false;
+            $f3->set('errors["questions"]', "Invalid selection");
+        } else {
+            $f3->set('selectedQuestions', $_POST['questions']);
+            //echo $f3->get('selectedQuestions');
+        }
+
+    }
+
+    $view = new Template();
+    echo $view->render
+    ('views/survey.html');
+
+});
+
+
+
 //Run fat free
 // -> runs class method instance method
 $f3->run();

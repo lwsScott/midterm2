@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+</head>
+<body>
+
+<div class="container card rounded">
+    <h3 class="m-3">Midterm Survey</h3>
+
+    <form class="form-group" id="data" action="#" method="post">
+
+        <div class="row m-1">
+            <div class="col-7">
+                <fieldset class="form-group">
+
+                    <!-- get name -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Please input your name"
+                               value="<check if='{{ !empty(@selectedName) }}'>{{ @selectedName }}</check>">
+                    </div>
+                    <span class="err">
+                        <check if="{{ isset(@errors['name']) }}">
+                            <p>{{ @errors['name'] }}</p>
+                        </check>
+                    </span>
+                    <br>
+
+                    <!-- get survey answers -->
+                    <div class="form-group">
+                        <label for="{{@question}}" class="col-sm-2 control-label">Check all that apply:</label>
+                        <br>
+                        <div class="col-sm-4">
+                            <repeat group="{{@questions}}" value="@question">
+                                <input type="checkbox" name="questions[]" id="{{@question}}" value="{{@question}}"
+                                <check if='{{ isset(@selectedQuestions) }}'>
+                                    <check if='{{ in_array(@question, @selectedQuestions) }}'>
+                                        checked="checked"
+                                    </check>
+                                </check>>
+                                {{ ucfirst(@question) }}</input><br>
+                            </repeat>
+                        </div>
+                        <span class="err">
+                        <check if="{{ isset(@errors['questions']) }}">
+                            <p>{{ @errors['questions'] }}</p>
+                        </check>
+                    </span>
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+        <button id="button" type="submit" class="btn-primary float-right">Next ></button>
+    </form>
+
+</div>
+</body>
+</html>
