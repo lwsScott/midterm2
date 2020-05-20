@@ -5,12 +5,13 @@
     <title>Summary</title>
 </head>
 <body>
+<h1 class="m-3">Midterm Survey</h1>
 
-<h1 class="card mb-0 ml-3 mt-3 p-2">Thank you for taking the survey  {{ @SESSION.name }}</h1>
+<h2 class="card mb-0 ml-3 mt-3 p-2">Thank you for taking the survey,  {{ @SESSION.name }}!</h2>
 
-<p class="card mb-0 ml-3 p-2">Your answers :
+<h3 class="card mb-0 ml-3 p-2"><strong>Your answers :</strong></h3>
     <check if="{{ isset(@SESSION.questions) }}">
-        {{ implode(@SESSION.questions, ', ') }}
+        <p>{{ implode(@SESSION.questions, ', ') }}</p>
     </check>
 
 </body>
