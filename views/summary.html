@@ -9,7 +9,7 @@
 
 <h2 class="card mb-0 ml-3 mt-3 p-2">Thank you for taking the survey,  {{ @SESSION.name }}!</h2>
 
-<h3 class="card mb-0 ml-3 p-2"><strong>Your answers :</strong></h3>
+<h3 class="card mb-0 ml-3 p-2"><strong>Your answers:</strong></h3>
     <check if="{{ isset(@SESSION.questions) }}">
         <p>{{ implode(@SESSION.questions, ', ') }}</p>
     </check>
