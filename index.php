@@ -24,7 +24,6 @@ $f3->route('GET /', function () {
 
 });
 
-
 // Define the survey route
 $f3->route('GET|POST /survey', function($f3) {
 
@@ -35,7 +34,7 @@ $f3->route('GET|POST /survey', function($f3) {
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // validate the data
-
+        $valid = true;
         // validate name
         if (!validName($_POST['name'])) {
             //var_dump($_POST);
@@ -61,16 +60,31 @@ $f3->route('GET|POST /survey', function($f3) {
             $f3->set('selectedQuestions', $_POST['questions']);
             //echo $f3->get('selectedQuestions');
         }
+        // data is valid
+        if($valid) {
+            // store the data in the session array
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['questions'] = $_POST['questions'];
 
+            // redirect to summary page
+            $f3->reroute('summary');
+            //session_destroy();
+        }
     }
 
     $view = new Template();
     echo $view->render
     ('views/survey.html');
-
 });
 
+// Define a summary route
+// display submitted
+$f3->route('GET|POST /summary', function () {
 
+    $view = new Template();
+    echo $view->render
+    ('views/summary.html');
+});
 
 //Run fat free
 // -> runs class method instance method

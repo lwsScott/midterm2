@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Summary</title>
+</head>
+<body>
+
+<h1 class="card mb-0 ml-3 mt-3 p-2">Thank you for taking the survey  {{ @SESSION.name }}</h1>
+
+<p class="card mb-0 ml-3 p-2">Your answers :
+    <check if="{{ isset(@SESSION.questions) }}">
+        {{ implode(@SESSION.questions, ', ') }}
+    </check>
+
+</body>
+</html>
