@@ -1,0 +1,16 @@
+{
+"name": "lscottgr/328/midterm2",
+"authors": [
+{
+"name": "Lewis Scott",
+"email": "lscott19@mail.greenriver.edu"
+
+}
+],
+"require": {
+"bcosca/fatfree-core": "dev-master"
+},
+  "autoload": {
+    "classmap": ["model/"]
+  }
+}
